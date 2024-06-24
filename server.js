@@ -3,17 +3,17 @@ const PORT = 3001;
 // const noteApp = require("./db/db.json");
 
 const app = express();
-
+const path = require('path');
 app.get('/index.html')
 
 // app.get("/", (req, res) => {
 //   res.send("Hello World!");
 // });
 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'Develop/public/index.html'));
 });
 
 // app.get('/api', (req, res) => res.json(termData));
