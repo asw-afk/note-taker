@@ -1,3 +1,12 @@
+// const router = require('express').Router();
+
+// router.use()
+
+// const notes = require('./Develop/db/db.json')
+
+
+
+
 let noteForm;
 let noteTitle;
 let noteText;
@@ -5,15 +14,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-const getThings = () => 
-  fetch('/api/notes', {
-    method: 'GET',
-  })
-  .then((res) => res.json())
-  .then((data) => data);
 
-// const buttonHandler = ('click') =>  
-// (window.location.href = "./Develop/");
 
 if (window.location.pathname === '/notes') {
   noteForm = document.querySelector('.note-form');
@@ -23,7 +24,10 @@ if (window.location.pathname === '/notes') {
   newNoteBtn = document.querySelector('.new-note');
   clearBtn = document.querySelector('.clear-btn');
   noteList = document.querySelectorAll('.list-container .list-group');
+
 }
+
+
 
 // Show an element
 const show = (elem) => {
@@ -39,7 +43,7 @@ const hide = (elem) => {
 let activeNote = {};
 
 const getNotes = () =>
-  fetch('/api/notes', {
+  fetch('/api/posts', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
@@ -47,7 +51,7 @@ const getNotes = () =>
   });
 
 const saveNote = (note) =>
-  fetch('/api/notes', {
+  fetch('/api/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -56,7 +60,7 @@ const saveNote = (note) =>
   });
 
 const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
+  fetch(`/api/posts${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
@@ -85,7 +89,8 @@ const renderActiveNote = () => {
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
-    text: noteText.value
+    text: noteText.value,
+    id: uuid()
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
