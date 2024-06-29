@@ -1,11 +1,3 @@
-// const router = require('express').Router();
-
-// router.use()
-
-// const notes = require('./Develop/db/db.json')
-
-
-
 
 let noteForm;
 let noteTitle;
@@ -50,13 +42,13 @@ const getNotes = () =>
     }
   });
 
-const saveNote = (note) =>
+const saveNote = (posts) =>
   fetch('/api/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(note)
+    body: JSON.stringify(posts)
   });
 
 const deleteNote = (id) =>
@@ -66,6 +58,27 @@ const deleteNote = (id) =>
       'Content-Type': 'application/json'
     }
   });
+
+
+const postNote = (posts) =>
+  fetch('api/posts', {
+    method: 'POST', 
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(posts),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log('Successful POST request:', data);
+      return data;
+    })
+    .catch((error) => {
+      console.error('Error in POST request', error);
+    });
+
+
+
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
@@ -90,7 +103,7 @@ const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
-    id: uuid()
+    id: id.value,
   };
   saveNote(newNote).then(() => {
     getAndRenderNotes();
@@ -207,3 +220,5 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+
