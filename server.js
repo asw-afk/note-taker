@@ -24,23 +24,27 @@ app.get("/notes", (req, res) =>
 );
 
 
-app.use(noteRoute);
-app.get("/api/posts", (req, res) => {
-  //Sends message to the client
-  req.sendFile(path.join(__dirname, "./public/notes.html"))
-  
-    res.json(`${req.method} request recieved to get notes`),
 
-    //Log our request to the terminal
-    console.info(`${res.method} request recieved to get notes `)
+
+// app.get("/api/posts", (req, res) => {
+//   //Sends message to the console
+//   res.sendFile(path.join(__dirname, "./public/notes.html"))
   
-});
+//     res.json(`${req.method} request recieved to get notes One`),
+
+//     //Log our request to the terminal
+//     console.info(`${req.method} request recieved to get notes Two `)
+  
+// });
 
 app.post('/api/posts', (req, res) => {
-  res.json(`${req.method} request recieved to add a note`);
+  app.use(noteRoute);
+  
+  res.json(req.method);
 
-  console.info(`${req.method} request recieved to add a note`)
+  console.info(req.method)
 })
+
 
 // app.get("/api/notes/:save"),
 //   (req, res) => {
