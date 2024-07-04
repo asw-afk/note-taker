@@ -7,10 +7,11 @@ noteRoute.get('/',  (req, res) =>
 );
 
 noteRoute.post('/', (req, res) => {
+    console.log(req.body);
 
     const { title, text,} = req.body;
 
-    if (title && text) {
+    if (req.body) {
 
         const newNote = {
             title, 

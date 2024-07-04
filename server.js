@@ -2,9 +2,8 @@ const express = require("express");
 const path = require("path");
 const api = require("./");
 const noteRoute = require("./public/assets/routes/notes");
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const app = express();
-//const posts = require('./public/assets/js/post')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -37,13 +36,13 @@ app.get("/notes", (req, res) =>
   
 // });
 
-app.post('/api/posts', (req, res) => {
-  app.use(noteRoute);
+// app.post('/api/posts', (req, res) => {
+//   app.use(noteRoute);
   
-  res.json(req.method);
+//   res.json(req.method);
 
-  console.info(req.method)
-})
+//   console.info(req.method)
+// })
 
 
 // app.get("/api/notes/:save"),
