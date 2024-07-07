@@ -3,7 +3,7 @@ const { readAndAppend, readFromFile } = require('../js/helper');
 
 //GET route for retrieving all of the notes
 noteRoute.get('/',  (req, res) => 
-    readFromFile('./db/posts.json').then((data) => res.json(JSON.parse(data)))
+    readFromFile('').then((data) => res.json(JSON.parse(data)))
 );
 
 noteRoute.post('/', (req, res) => {
@@ -18,13 +18,7 @@ noteRoute.post('/', (req, res) => {
             text,
         };
 
-        readAndAppend(newNote, './db/posts.json');
-
-        const response = {
-            status: 'succes',
-            body: newNote, 
-        };
-
+        readAndAppend(newNote, './db/db.json');
         res.json(response);
     }   else {
         res.json('Error in posting notes');
